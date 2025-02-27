@@ -1,13 +1,12 @@
 from enum import UNIQUE
-
 from django.db import models
 from django.db.models import CharField
+from django.contrib.auth.models import AbstractUser
 
 
-class Usuario(models.Model):
+class Usuario(AbstractUser):
     nome = models.CharField(max_length=50)
-    senha = models.CharField(max_length=30)
-    email = models.EmailField(max_length=50)
+    email = models.EmailField(unique=True)
 
 def __str__(self):
-    return f'{self.nome} + {self.senha} + {self.email}'
+    return self.username
