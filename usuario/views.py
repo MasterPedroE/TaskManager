@@ -3,9 +3,12 @@ from django.core.validators import validate_email
 from django.shortcuts import render
 from .models import Usuario
 
+def home(request):
+    return render(request, 'index.html')
+
 def fuser(request):
     leitores = Usuario.objects.all()
-    return render(request, 'foruser.html', {'leitors' : leitores})
+    return render(request, 'foruser.html', {'leitores' : leitores})
 
 def caduser(request):
     vnome = request.POST.get('nome')

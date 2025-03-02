@@ -6,5 +6,3 @@ from .models import Usuario
 class UsuarioAdmin(admin.ModelAdmin):
     list_display = ('username', 'email', 'nome')
     search_fields = ('username', 'email', 'nome')
-
-@

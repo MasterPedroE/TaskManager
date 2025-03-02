@@ -16,9 +16,10 @@ Including another URLconf
 """
 
 from django.urls import path
-from .views import fuser
+from .views import fuser, home
 
 urlpatterns = [
+    path('', home, name='home'),
     path('fuser/', fuser, name='fuser'),
 
 ]
