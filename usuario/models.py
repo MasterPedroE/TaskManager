@@ -5,7 +5,6 @@ from django.contrib.auth.models import AbstractUser
 
 
 class Usuario(AbstractUser):
-    nome = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
 
 def __str__(self):

@@ -9,15 +9,19 @@ def home(request):
     return render(request, 'index.html')
 
 def fuser(request):
-    leitores = Usuario.objects.all()
-    return render(request, 'foruser.html', {'leitores' : leitores})
+    usuarios = Usuario.objects.all()
+    return render(request, 'foruser.html', {'usuarios' : usuarios})
 
 def caduser(request):
-    vnome = request.POST.get('nome')
+    vnome = request.POST.get('username')
+    vsenha = request.POST.get('password')
     vemail = request.POST.get('email')
 
     if not vnome:
         return render(request, 'caduser.html', {'erro' : 'O nome é obrigatório.'})
+
+    if not vsenha:
+        return render( request, 'caduser.html', {'erro': 'A senhea é obrigatoria'})
 
     if not vemail:
         return render(request, 'caduser.html', {'erro' : 'O email é obrigatório.'})
@@ -25,17 +29,17 @@ def caduser(request):
     try:
         validate_email(vemail)
     except ValidationError:
-        return render(request, 'caduser.html', {'erro' : 'O emial é obrigatório.'})
+        return render(request, 'caduser.html', {'erro' : 'O emial é inválido.'})
 
-    Usuario.objects.create(nome=vnome, email=vemail)
+    Usuario.objects.create_user(username=vnome, email=vemail, password=vsenha)
 
     return render(request, 'caduser.html', {'sucesso!' : 'Foi cadastrado com sucesso.'})
 
 def login(request):
     if request.method == 'POST':
-        usuario = request.POST['nome']
+        usuario = request.POST['username']
         senha = request.POST['senha']
-        user = authenticate(request, nome=usuario, senha=senha)
+        user = authenticate(request, username=usuario, senha=senha)
 
         if user is not None:
             login(request, user)
@@ -43,7 +47,7 @@ def login(request):
 
         else:
             messages.error(request, 'Usuário ou senha inválidos.')
-            return render(request, 'login.html')
+            return render(request, 'login.html', {'erro': 'Usuário ou senha invalido'})
 
 def logout(request):
     logout(request)
