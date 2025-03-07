@@ -33,7 +33,7 @@ def caduser(request):
 
     Usuario.objects.create_user(username=vnome, email=vemail, password=vsenha)
 
-    return render(request, 'caduser.html', {'sucesso!' : 'Foi cadastrado com sucesso.'})
+    return render(request, 'caduser.html', {'sucesso' : 'Foi cadastrado com sucesso.'})
 
 def login(request):
     if request.method == 'POST':
