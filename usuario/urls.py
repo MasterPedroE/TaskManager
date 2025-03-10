@@ -16,12 +16,14 @@ Including another URLconf
 """
 
 from django.urls import path
-from .views import fuser, home, login, logout
+from .views import fuser, home, login, logout, fcaduser,caduser
 
 urlpatterns = [
     path('', home, name='home'),
     path('fuser/', fuser, name='fuser'),
     path('login/', login, name='login'),
     path('logout/', logout, name='logout'),
+    path('fcaduser/', fcaduser, name='fcaduser'),
+    path('caduser/', caduser, name='caduser'),
 
 ]
