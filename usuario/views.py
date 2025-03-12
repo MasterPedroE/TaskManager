@@ -12,9 +12,6 @@ def fuser(request):
     usuarios = Usuario.objects.all()
     return render(request, 'foruser.html', {'usuarios' : usuarios})
 
-def fcaduser(request):
-    return render(request, 'caduser.html')
-
 def caduser(request):
     if request.method == "POST":
         vnome = request.POST.get('username')
@@ -42,6 +39,8 @@ def caduser(request):
         except Exception as e:
             messages.error(request, f'Erro ao cadastrar usuário: {str(e)}')
             return render(request, 'caduser.html')
+
+    return render(request, 'caduser.html')
 
 def login(request):
     if request.method == 'POST':
