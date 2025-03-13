@@ -8,6 +8,9 @@ from .models import Usuario
 def home(request):
     return render(request, 'index.html')
 
+def telacad(request):
+    return render(request, 'telalog.html')
+
 def fuser(request):
     usuarios = Usuario.objects.all()
     return render(request, 'foruser.html', {'usuarios' : usuarios})
@@ -42,7 +45,7 @@ def caduser(request):
 
     return render(request, 'caduser.html')
 
-def login(request):
+def loginuser(request):
     if request.method == 'POST':
         usuario = request.POST['username']
         senha = request.POST['password']
@@ -50,11 +53,13 @@ def login(request):
 
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('telacad')
 
         else:
             messages.error(request, 'Usuário ou senha inválidos.')
             return render(request, 'login.html', {'erro': 'Usuário ou senha invalido'})
+
+    return render(request, 'login.html')
 
 def logout(request):
     logout(request)
