@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from .views import fuser, home, loginuser, logout,caduser, telacad
+from .views import fuser, home, loginuser, logout,caduser, telacad, updateuser
 
 urlpatterns = [
     path('', home, name='home'),
@@ -25,5 +25,6 @@ urlpatterns = [
     path('logout/', logout, name='logout'),
     path('caduser/', caduser, name='caduser'),
     path('telacad/', telacad, name='telacad'),
+    path('updateuser/<int:id>', updateuser, name='updateuser'),
 
 ]

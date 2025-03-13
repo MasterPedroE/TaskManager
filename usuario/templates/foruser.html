@@ -25,6 +25,8 @@
       <td>{{usuario.id}}</td>
       <td>{{usuario.username}}</td>
       <td>{{usuario.email}}</td>
+      <td><a href="{% url 'updateuser' upuser.id%}" ><button type="button">Atualizar</button></a></td>
+
     </tr>
   {% endfor %}
   <a href="{% url 'home' %}"> Voltar para home</a>

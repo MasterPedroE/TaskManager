@@ -45,6 +45,25 @@ def caduser(request):
 
     return render(request, 'caduser.html')
 
+def updateuser(request, id):
+    if request.method == "POST":
+        vname = request.POST.get('username')
+        vemail = request.POST.get('email')
+        vsenha = request.POST.get('password')
+        upusers = Usuario.objects.all(id=id)
+
+        if not vname or not vemail or not vsenha:
+            return render(request, 'updateuser.html', {'erro:' : 'Todos campos são obrigatórios!'})
+
+        upusers.username = vname
+        upusers.email = vemail
+        upusers.password = vsenha
+        Usuario.save()
+        messages.success("Usuário salco com sucesso!")
+        return redirect(fuser)
+
+    return render(request, 'updateuser.html')
+
 def loginuser(request):
     if request.method == 'POST':
         usuario = request.POST['username']
